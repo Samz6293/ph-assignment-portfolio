@@ -39,7 +39,8 @@ export interface Profile {
   /** Path to the hero photo, e.g. "/images/profile.png" */
   photo: string;
   bio: string;
-  journey: string;
+  /** Story paragraphs rendered under "The journey so far" in the About section */
+  journey: string[];
   hobbies: string[];
   education: Education[];
   socials: {

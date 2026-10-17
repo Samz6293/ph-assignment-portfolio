@@ -12,14 +12,18 @@ export function About({ index, label }: SectionProps) {
           {/* Narrative */}
           <div className="space-y-8 lg:col-span-7">
             <p className="font-display text-2xl leading-snug italic md:text-3xl">
-              “{profileData.bio}”
+              {profileData.bio}
             </p>
 
             <div className="space-y-4 text-muted-foreground">
               <h3 className="font-mono text-xs tracking-widest text-foreground uppercase">
                 The journey so far
               </h3>
-              <p className="leading-relaxed">{profileData.journey}</p>
+              {profileData.journey.map((paragraph) => (
+                <p key={paragraph} className="leading-relaxed">
+                  {paragraph}
+                </p>
+              ))}
             </div>
           </div>
 
