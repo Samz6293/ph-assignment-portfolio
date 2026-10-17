@@ -36,11 +36,11 @@ Verify with: `npm run lint && npx tsc --noEmit && npm run build`
   - `content/experience.ts` — currently `[]`; the Experience section and its nav link auto-hide until an entry exists.
 - `app/page.tsx` — single-page home: `<Navbar />`, `<Hero />`, then `getVisibleSections()` rendered through the section registry, then `<Footer />`. Reorder/rename/hide sections by editing `content/site.ts` only.
 - `components/sections/index.ts` — `sectionRegistry` (`SectionKey → component`) + the shared `SectionProps` (`{ index, label }`). New sections: create component → extend `SectionKey` in `types/index.ts` → register → list in `content/site.ts`.
-- `app/projects/[slug]/page.tsx` — project detail pages; `generateStaticParams` from `projectsData` (with cacheComponents it must return ≥1 param — do NOT export `dynamicParams`; unknown slugs hit `notFound()`). `generateMetadata` uses `"use cache"`.
+- `app/projects/[slug]/page.tsx` — project detail pages; `generateStaticParams` from `projectsData` (with cacheComponents it must return ≥1 param — do NOT export `dynamicParams`; unknown slugs hit `notFound()`). `generateMetadata` uses `"use cache"`. The page itself must NOT await `params` (triggers the "URL data outside of Suspense" insight under partial prefetching) — it renders a shell + `<Suspense>` and passes the promise to `app/projects/[slug]/project-details.tsx`, which awaits it.
 - `components/icons.tsx` — inline SVG social brand icons (lucide dropped brand icons) + `skillIcons` map keyed by strings in `content/skills.ts`; unknown keys fall back to a dot.
 - `styles/theme.css` — **the only place colors are defined** (see Design system).
 - `components/ui/` — shadcn components (`npx shadcn add <component>` to extend, config already set).
-- `public/images/` — placeholder PNGs (profile + project1–3) and `public/resume.pdf` placeholder; replace with real assets.
+- `public/images/` — `linkedinDP-bright.jpg` is the profile photo (referenced from `content/profile.ts`); `project1–3.png` are project screenshots (referenced from `content/projects.ts`). `overwatch-heroes-directory.png` is currently unreferenced. `public/resume.pdf` is the file behind `siteData.resumeUrl`.
 
 ## Design system (deliberately NOT the generic AI look)
 
@@ -50,15 +50,15 @@ Dark monochrome editorial + one warm accent. Hard rules:
 - **Accent discipline** — `--highlight` (amber, `oklch(0.8 0.15 85)`) is the ONLY hue, used sparingly: links, focus rings (`--ring: var(--highlight)`), active nav, small details. Everything else is grayscale (saturation 0).
 - **Forbidden**: gradients, box-shadows, glassmorphism/blur, emoji in UI chrome. Use hairline `border-border` dividers instead.
 - **Fonts** (set in `app/layout.tsx` via next/font): `--font-display` = Libre Baskerville (headings), `--font-sans` = Biryani (body; note: weights 400/600/700 only — no 500), `--font-mono` = Geist Mono (labels, tags, meta). Mapped in `@theme inline` in `app/globals.css`.
-- **Imagery** is always `grayscale` so any source photo fits the theme.
+- **Imagery** — project-card screenshots are `grayscale` by default and fade to full color on card hover; all other imagery (hero portrait, project detail screenshots) renders in full color at high quality (`quality={100}`).
 - Section headers use `components/section-heading.tsx` (mono numbered eyebrow + serif heading + hairline).
 - Light theme (if ever wanted): edit `:root` in `styles/theme.css` / toggle `.dark` — nothing else changes.
 
 ## Project goals / constraints
 
-- Bootcamp assignment (requirements in `content/Instruction.pdf`): single-page portfolio + project detail pages; **modularity is the top priority** — swapping themes, about text, projects, section order must stay a data-only change.
+- Bootcamp assignment: single-page portfolio + project detail pages; **modularity is the top priority** — swapping themes, about text, projects, section order must stay a data-only change.
 - Must be deployed with a working live link (Vercel) or the submission scores 0.
-- `content/*.ts` currently holds placeholder identity data (name "dh1", example.com email/socials, placeholder images/resume) — replace with the owner's real data before submission.
+- `content/profile.ts` now holds the owner's real data (Sabbir Al Sameer); some entries in `content/projects.ts` still carry example.com placeholder URLs — keep new content real and data-only.
 
 ## Component conventions
 

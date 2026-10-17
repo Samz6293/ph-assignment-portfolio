@@ -3,17 +3,13 @@ import { ArrowDownToLine } from "lucide-react";
 import { siteData } from "@/content/site";
 import { profileData } from "@/content/profile";
 import {
-  FacebookIcon,
   GithubIcon,
   LinkedinIcon,
-  XIcon,
 } from "@/components/icons";
 
 const socialLinks = [
   { label: "GitHub", url: profileData.socials.github, Icon: GithubIcon },
   { label: "LinkedIn", url: profileData.socials.linkedin, Icon: LinkedinIcon },
-  { label: "X", url: profileData.socials.twitter, Icon: XIcon },
-  { label: "Facebook", url: profileData.socials.facebook, Icon: FacebookIcon },
 ].filter((s): s is typeof s & { url: string } => Boolean(s.url));
 
 export function Hero() {
@@ -76,8 +72,10 @@ export function Hero() {
             alt={`Portrait of ${profileData.name}`}
             width={640}
             height={800}
+            sizes="(max-width: 640px) 100vw, 320px"
+            quality={100}
             priority
-            className="relative aspect-[4/5] w-full border border-border object-cover grayscale"
+            className="relative aspect-4/5 w-full border border-border object-cover"
           />
         </div>
       </div>

@@ -10,8 +10,8 @@ import {
 const socialLinks = [
   { label: "GitHub", url: profileData.socials.github, Icon: GithubIcon },
   { label: "LinkedIn", url: profileData.socials.linkedin, Icon: LinkedinIcon },
-  { label: "X", url: profileData.socials.twitter, Icon: XIcon },
-  { label: "Facebook", url: profileData.socials.facebook, Icon: FacebookIcon },
+//   { label: "X", url: profileData.socials.twitter, Icon: XIcon },
+//   { label: "Facebook", url: profileData.socials.facebook, Icon: FacebookIcon },
 ].filter((s): s is typeof s & { url: string } => Boolean(s.url));
 
 export function Footer() {

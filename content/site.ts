@@ -2,9 +2,9 @@ import { experienceData } from "@/content/experience";
 import { SectionEntry, SiteConfig } from "@/types";
 
 export const siteData: SiteConfig = {
-  title: "dh1 — Full Stack Developer",
+  title: "Sameer — Full Stack Developer",
   description:
-    "Portfolio of dh1, a full stack developer building modern, efficient and scalable web applications.",
+    "Portfolio of Sameer, a full stack developer building modern, efficient and scalable web applications.",
   sections: [
     { id: "about", label: "About" },
     { id: "skills", label: "Skills" },
