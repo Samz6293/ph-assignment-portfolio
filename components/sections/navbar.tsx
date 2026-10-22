@@ -93,7 +93,7 @@ export function Navbar() {
 
       {/* Mobile menu */}
       {open ? (
-        <ul className="border-t border-border md:hidden">
+        <ul className="animate-in fade-in slide-in-from-top duration-200 border-t border-border md:hidden">
           {visibleSections.map((section) => (
             <li key={section.id}>
               <a
