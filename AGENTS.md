@@ -26,6 +26,7 @@ Verify with: `npm run lint && npx tsc --noEmit && npm run build`
 - `next.config.ts` has `cacheComponents: true` + `partialPrefetching: true`. Data fetching is **dynamic by default**; to make something static you must opt in with `"use cache"` (plus `cacheLife`/`cacheTag` where needed). Uncached async work must sit behind a `<Suspense>` boundary or the build reports validation errors (sync IO like `Date.now()` in the prerender shell is a hard build error); `instant = false` in a route segment is a temporary escape hatch. Read `node_modules/next/dist/docs/01-app/02-guides/migrating-to-cache-components.md` and `node_modules/next/dist/docs/01-app/03-api-reference/01-directives/use-cache.md` before touching data fetching.
 - React Compiler is on (`reactCompiler: true`) — don't hand-write `useMemo`/`React.memo` for correctness.
 - Tailwind v4 is CSS-first: no `tailwind.config`; theme/utilities live in `app/globals.css`, loaded via the `@tailwindcss/turbopack` rule in `next.config.ts`.
+- `next.config.ts` sets `images.qualities: [100]` — Next 16 allowlists image quality values; `<Image>` must use `quality={100}` (or another allowlisted value), the default of 75 will error.
 - shadcn style is `base-nova` (`components.json`): primitives come from `@base-ui/react`, **not Radix**. `cn` is the `cn` npm package, re-exported by `lib/utils.ts` — don't add `clsx`/`tailwind-merge`.
 - Path alias `@/*` maps to the repo root (`@/types`, `@/content`, `@/components/ui/...`).
 
