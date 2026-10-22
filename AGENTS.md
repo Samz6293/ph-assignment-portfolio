@@ -63,5 +63,6 @@ Dark monochrome editorial + one warm accent. Hard rules:
 
 ## Component conventions
 
-- Server components by default; only `Navbar` and `CopyButton` are client components. Under cacheComponents, client components must not read `usePathname`/`useSearchParams` without a `<Suspense>` boundary — Navbar deliberately uses IntersectionObserver for scroll-spy instead.
+- Server components by default; client components are `Navbar`, `CopyButton`, `Hero`, `SectionHeading`, and `components/animation/reveal.tsx` (GSAP wrapper — sections stay server by passing their markup as children). Under cacheComponents, client components must not read `usePathname`/`useSearchParams` without a `<Suspense>` boundary — Navbar deliberately uses IntersectionObserver for scroll-spy instead.
+- GSAP setup lives in `lib/gsap.ts` (plugin registration + `prefersReducedMotion()` helper); scroll/load reveals go through the `Reveal` wrapper; bespoke timelines only in `Hero` and `SectionHeading`. GSAP sets hidden states after hydration — never hide content in CSS.
 - Social/skill icons come from `components/icons.tsx`; don't add brand icons via lucide (they were removed upstream).
