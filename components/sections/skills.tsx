@@ -1,5 +1,6 @@
 import { skillsData } from "@/content/skills";
 import { getSkillIcon } from "@/components/icons";
+import { Reveal } from "@/components/animation/reveal";
 import { SectionHeading } from "@/components/section-heading";
 import type { SectionProps } from "@/components/sections";
 
@@ -17,7 +18,10 @@ export function Skills({ index, label }: SectionProps) {
           description="The stack I reach for day to day."
         />
 
-        <div className="grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+        <Reveal
+          stagger={0.1}
+          className="grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-3"
+        >
           {skillsData.map((group) => (
             <div key={group.category} className="bg-background p-6">
               <div className="flex items-baseline justify-between">
@@ -45,7 +49,7 @@ export function Skills({ index, label }: SectionProps) {
               </ul>
             </div>
           ))}
-        </div>
+        </Reveal>
       </div>
     </section>
   );

@@ -1,5 +1,6 @@
 import { MessageCircle, Phone } from "lucide-react";
 import { profileData } from "@/content/profile";
+import { Reveal } from "@/components/animation/reveal";
 import { CopyButton } from "@/components/copy-button";
 import { SectionHeading } from "@/components/section-heading";
 import { WhatsappIcon } from "@/components/icons";
@@ -23,7 +24,7 @@ export function Contact({ index, label }: SectionProps) {
 
         <div className="max-w-3xl">
           {/* Email — the centerpiece */}
-          <div className="flex items-center gap-4">
+          <Reveal className="flex items-center gap-4">
             <a
               href={`mailto:${contact.email}`}
               className="font-mono text-xl break-all transition-colors hover:text-highlight focus-visible:ring-3 focus-visible:ring-ring/50 outline-none sm:text-2xl md:text-3xl"
@@ -31,10 +32,14 @@ export function Contact({ index, label }: SectionProps) {
               {contact.email}
             </a>
             <CopyButton text={contact.email} className="shrink-0" />
-          </div>
+          </Reveal>
 
           {/* Phone / WhatsApp */}
-          <dl className="mt-12 grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2">
+          <Reveal
+            as="dl"
+            stagger={0.1}
+            className="mt-12 grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2"
+          >
             {contact.phone ? (
               <div className="bg-background p-6">
                 <dt className="flex items-center gap-2 font-mono text-xs tracking-widest text-muted-foreground uppercase">
@@ -71,7 +76,7 @@ export function Contact({ index, label }: SectionProps) {
                 </dd>
               </div>
             ) : null}
-          </dl>
+          </Reveal>
         </div>
       </div>
     </section>

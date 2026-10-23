@@ -1,4 +1,5 @@
 import { profileData } from "@/content/profile";
+import { Reveal } from "@/components/animation/reveal";
 import { SectionHeading } from "@/components/section-heading";
 import type { SectionProps } from "@/components/sections";
 
@@ -10,7 +11,7 @@ export function About({ index, label }: SectionProps) {
 
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
           {/* Narrative */}
-          <div className="space-y-8 lg:col-span-7">
+          <Reveal stagger={0.12} className="space-y-8 lg:col-span-7">
             <p className="font-display text-2xl leading-snug italic md:text-3xl">
               {profileData.bio}
             </p>
@@ -25,7 +26,7 @@ export function About({ index, label }: SectionProps) {
                 </p>
               ))}
             </div>
-          </div>
+          </Reveal>
 
           {/* Interests */}
           <aside className="lg:col-span-5">
@@ -33,7 +34,7 @@ export function About({ index, label }: SectionProps) {
               <h3 className="font-mono text-xs tracking-widest text-muted-foreground uppercase">
                 Off the clock
               </h3>
-              <ul className="mt-5 divide-y divide-border">
+              <Reveal as="ul" stagger={0.06} className="mt-5 divide-y divide-border">
                 {profileData.hobbies.map((hobby) => (
                   <li
                     key={hobby}
@@ -43,7 +44,7 @@ export function About({ index, label }: SectionProps) {
                     {hobby}
                   </li>
                 ))}
-              </ul>
+              </Reveal>
             </div>
           </aside>
         </div>

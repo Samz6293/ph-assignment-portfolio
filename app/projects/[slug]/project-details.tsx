@@ -2,6 +2,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ArrowUpRight } from "lucide-react";
 import { projectsData } from "@/content/projects";
+import { Reveal } from "@/components/animation/reveal";
 
 /**
  * All content that depends on the URL. Awaits `params` inside the page's
@@ -19,7 +20,12 @@ export async function ProjectDetails({
   return (
     <>
       {/* Tech stack */}
-      <ul className="mt-10 flex flex-wrap gap-1.5">
+      <Reveal
+        as="ul"
+        stagger={0.04}
+        delay={0.1}
+        className="mt-10 flex flex-wrap gap-1.5"
+      >
         {project.techStack.map((tech) => (
           <li
             key={tech}
@@ -28,40 +34,42 @@ export async function ProjectDetails({
             {tech}
           </li>
         ))}
-      </ul>
+      </Reveal>
 
-      <h1 className="mt-5 font-display text-4xl tracking-tight md:text-5xl">
-        {project.name}
-      </h1>
+      <Reveal>
+        <h1 className="mt-5 font-display text-4xl tracking-tight md:text-5xl">
+          {project.name}
+        </h1>
 
-      <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-        {project.fullDescription}
-      </p>
+        <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
+          {project.fullDescription}
+        </p>
 
-      {/* Links */}
-      <div className="mt-8 flex flex-wrap gap-3">
-        <a
-          href={project.liveUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex h-10 items-center gap-2 bg-primary px-5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-85"
-        >
-          Live Site
-          <ArrowUpRight className="size-4" />
-        </a>
-        <a
-          href={project.githubUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex h-10 items-center gap-2 border border-border px-5 text-sm transition-colors hover:border-muted-foreground/60"
-        >
-          GitHub Repository
-          <ArrowUpRight className="size-4" />
-        </a>
-      </div>
+        {/* Links */}
+        <div className="mt-8 flex flex-wrap gap-3">
+          <a
+            href={project.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex h-10 items-center gap-2 bg-primary px-5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-85"
+          >
+            Live Site
+            <ArrowUpRight className="size-4" />
+          </a>
+          <a
+            href={project.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex h-10 items-center gap-2 border border-border px-5 text-sm transition-colors hover:border-muted-foreground/60"
+          >
+            GitHub Repository
+            <ArrowUpRight className="size-4" />
+          </a>
+        </div>
+      </Reveal>
 
       {/* Screenshot */}
-      <div className="relative mt-12 aspect-video w-full border border-border bg-card">
+      <Reveal className="relative mt-12 aspect-video w-full border border-border bg-card">
         <Image
           src={project.image}
           alt={`${project.name} screenshot`}
@@ -71,11 +79,11 @@ export async function ProjectDetails({
           className="object-contain"
           priority
         />
-      </div>
+      </Reveal>
 
       {/* Challenges & future plans */}
       <div className="mt-16 grid grid-cols-1 gap-12 md:grid-cols-2">
-        <section>
+        <Reveal as="section">
           <h2 className="font-mono text-xs tracking-widest text-muted-foreground uppercase">
             Challenges faced
           </h2>
@@ -91,9 +99,9 @@ export async function ProjectDetails({
               </li>
             ))}
           </ol>
-        </section>
+        </Reveal>
 
-        <section>
+        <Reveal as="section" delay={0.1}>
           <h2 className="font-mono text-xs tracking-widest text-muted-foreground uppercase">
             Improvements & future plans
           </h2>
@@ -109,7 +117,7 @@ export async function ProjectDetails({
               </li>
             ))}
           </ol>
-        </section>
+        </Reveal>
       </div>
     </>
   );

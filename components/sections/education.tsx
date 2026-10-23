@@ -1,4 +1,5 @@
 import { profileData } from "@/content/profile";
+import { Reveal } from "@/components/animation/reveal";
 import { SectionHeading } from "@/components/section-heading";
 import type { SectionProps } from "@/components/sections";
 
@@ -9,7 +10,11 @@ export function Education({ index, label }: SectionProps) {
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeading index={index} label={label} />
 
-        <ol className="max-w-3xl border-l border-border pl-8">
+        <Reveal
+          as="ol"
+          stagger={0.12}
+          className="max-w-3xl border-l border-border pl-8"
+        >
           {profileData.education.map((entry) => (
             <li key={`${entry.degree}-${entry.institution}`} className="relative pb-10 last:pb-0">
               <span
@@ -28,7 +33,7 @@ export function Education({ index, label }: SectionProps) {
               ) : null}
             </li>
           ))}
-        </ol>
+        </Reveal>
       </div>
     </section>
   );
